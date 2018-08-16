@@ -36,7 +36,7 @@
 using grpc::Server;
 using grpc::ServerBuilder;
 
-DEFINE_int32(port, 10889, "Service port");
+DEFINE_string(port, "50051", "Service port");
 DEFINE_string(intf, "eth0", "main interface");
 DEFINE_string(ipip_intf, "ipip0", "ipip (v4) encap interface");
 DEFINE_string(ipip6_intf, "ipip60", "ip(6)ip6 (v6) encap interface");
@@ -83,7 +83,7 @@ void RunServer(
     katran::KatranConfig& config,
     int32_t delay,
     std::shared_ptr<folly::EventBase> evb) {
-  std::string server_address("0.0.0.0:50051");
+  std::string server_address("0.0.0.0:" + FLAGS_port);
   lb::katran::KatranGrpcService service(config);
 
   ServerBuilder builder;
